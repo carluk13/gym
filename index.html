@@ -90,7 +90,7 @@ h2{margin:26px 2px 10px;font-size:20px;font-weight:700;letter-spacing:-.01em}
 .exh .cnt{margin-left:auto;flex-shrink:0;font-size:14px;font-weight:700;color:var(--ink2);min-width:36px;text-align:right}
 .ex.alldone .exh .cnt{color:var(--acc)}
 .chev{flex-shrink:0;transition:transform .45s var(--spring);color:var(--ink3)}
-.ex.open .chev{transform:rotate(180deg)}
+.ex.open .exh .chev{transform:rotate(180deg)}
 .exb{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--spring)}
 .ex.open .exb{grid-template-rows:1fr}
 .exb>div{min-height:0;overflow:hidden}
@@ -208,6 +208,46 @@ body.inworkout #tabs{display:none}
 .pick{display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 4px;border-bottom:1px solid var(--line);text-align:left;font-size:16px}
 .pick:active{background:var(--s2)}
 
+/* catálogo y fotos */
+.srch{position:sticky;top:-10px;z-index:3;box-shadow:0 -12px 0 var(--s1),0 6px 12px -6px rgba(0,0,0,.6);width:100%;height:44px;border-radius:12px;border:0;background:var(--s2);color:var(--ink);padding:0 14px;font:500 16px -apple-system,system-ui,sans-serif;margin:4px 0 8px;-webkit-appearance:none;appearance:none}
+.srch::placeholder{color:var(--ink3)}
+.grp{margin-top:6px}
+.grph{display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 2px;font-size:17px;font-weight:800;letter-spacing:-.01em}
+.grph small{font-size:13px;font-weight:600;color:var(--ink3);margin-left:6px}
+.grph .chev{color:var(--ink3)}
+.grp.open>.grph .chev{transform:rotate(180deg)}
+.grpb{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--spring)}
+.grp.open>.grpb{grid-template-rows:1fr}
+.grpb>div{min-height:0;overflow:hidden}
+.pki{border-radius:12px;background:var(--s2);margin-bottom:6px;overflow:hidden}
+.pkh{display:flex;align-items:center;gap:12px;width:100%;padding:8px 10px;text-align:left;font-size:15px;font-weight:600}
+.pkh .th{width:52px;height:40px;border-radius:8px;background-repeat:no-repeat;background-color:var(--s3);flex-shrink:0}
+.pkh .nm{flex:1;min-width:0;line-height:1.2}
+.pkh .tag{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.04em}
+.pki .pkb{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--spring)}
+.pki.open .pkb{grid-template-rows:1fr}
+.pki.open .chev{transform:rotate(180deg)}
+.pkb>div{min-height:0;overflow:hidden}
+.pkin{padding:0 10px 10px}
+.ph{position:relative;border-radius:12px;overflow:hidden;background:#fff;aspect-ratio:4/3}
+.ph .f{position:absolute;inset:0;background-repeat:no-repeat}
+.ph .f.b{animation:frames 2.6s ease-in-out infinite}
+@keyframes frames{0%,38%{opacity:0}50%,88%{opacity:1}100%{opacity:0}}
+.ph .cr{position:absolute;right:6px;bottom:6px;padding:2px 6px;border-radius:5px;background:rgba(0,0,0,.55);color:#fff;font-size:10px;font-weight:600}
+.pkadd{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:48px;margin-top:8px;border-radius:12px;background:var(--acc);color:var(--acc-ink);font-weight:800;font-size:16px}
+.pkadd[disabled]{background:var(--s3);color:var(--ink3)}
+.howto{display:flex;align-items:center;gap:10px;width:100%;padding:6px;margin-bottom:10px;border-radius:10px;background:var(--s2);font-size:14px;font-weight:600;color:var(--ink2);text-align:left}
+.howto .th{width:44px;height:34px;border-radius:7px;background-repeat:no-repeat;background-color:var(--s3)}
+.howto .chev{margin-left:auto}
+.ex.phon .howto .chev{transform:rotate(180deg)}
+.exph{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--spring)}
+.ex.phon .exph{grid-template-rows:1fr}
+.exph>div{min-height:0;overflow:hidden}
+.exph .ph{margin-bottom:10px}
+.rx .th{display:block;width:44px;height:34px;border-radius:7px;background-repeat:no-repeat;background-color:var(--s3);flex-shrink:0}
+.steps{margin:10px 0 0;padding-left:20px;color:var(--ink2);font-size:14px;line-height:1.45}
+.steps b{color:var(--ink)}
+
 /* resumen */
 .hero{padding:26px 18px;border-radius:20px;background:var(--acc);color:var(--acc-ink);text-align:center;animation:heroIn .7s var(--pop) both}
 @keyframes heroIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:none}}
@@ -244,39 +284,47 @@ body.inworkout #tabs{display:none}
 /* ================= datos ================= */
 var KEY = 'gym.v1';
 var EX_DEF = {
-  dom: { n: 'Dominadas asistidas', sets: 3, min: 6, max: 10, rest: 120, inc: 5, asis: true },
-  jal: { n: 'Jalón al pecho, agarre neutro estrecho', sets: 3, min: 8, max: 12, rest: 120, inc: 5 },
-  rms: { n: 'Remo sentado en máquina, agarre neutro', sets: 3, min: 8, max: 12, rest: 120, inc: 5 },
-  rmp: { n: 'Remo en polea', sets: 3, min: 8, max: 12, rest: 120, inc: 5 },
-  cpm: { n: 'Curl predicador en máquina', sets: 3, min: 8, max: 12, rest: 90, inc: 5 },
-  cbp: { n: 'Curl con barra en polea', sets: 3, min: 8, max: 12, rest: 90, inc: 5 },
-  cmd: { n: 'Curl con mancuernas de pie', sets: 3, min: 8, max: 12, rest: 90, inc: 2, opt: true },
-  pbp: { n: 'Press banca', sets: 3, min: 6, max: 10, rest: 150, inc: 2.5 },
-  ppm: { n: 'Press de pecho en máquina', sets: 3, min: 8, max: 12, rest: 120, inc: 5 },
-  fon: { n: 'Fondos asistidos', sets: 3, min: 6, max: 10, rest: 120, inc: 5, asis: true },
-  tpo: { n: 'Extensión de tríceps en polea', sets: 3, min: 10, max: 15, rest: 90, inc: 5 },
-  pbi: { n: 'Press banca inclinado', sets: 3, min: 6, max: 10, rest: 150, inc: 2.5 },
-  tnc: { n: 'Tríceps sobre la cabeza en polea', sets: 3, min: 10, max: 15, rest: 90, inc: 5, opt: true },
-  prn: { n: 'Prensa de piernas', sets: 3, min: 8, max: 12, rest: 150, inc: 10 },
-  exq: { n: 'Extensión de cuádriceps', sets: 3, min: 10, max: 15, rest: 90, inc: 5 },
-  abd: { n: 'Abductores (abrir)', sets: 3, min: 12, max: 15, rest: 90, inc: 5 },
-  adu: { n: 'Aductores (cerrar)', sets: 3, min: 12, max: 15, rest: 90, inc: 5 },
-  hip: { n: 'Hip thrust en máquina', sets: 3, min: 8, max: 12, rest: 120, inc: 10 },
-  hom: { n: 'Press de hombros en máquina', sets: 3, min: 8, max: 12, rest: 90, inc: 5, opt: true },
-  abs: { n: 'Abdominales en máquina', sets: 3, min: 12, max: 20, rest: 60, inc: 5, opt: true }
+  dom: { n: 'Dominadas asistidas', sets: 3, min: 6, max: 10, rest: 120, inc: 5, asis: true, img: 'Pullups' },
+  jal: { n: 'Jalón al pecho, agarre neutro estrecho', sets: 3, min: 8, max: 12, rest: 120, inc: 5, img: 'V-Bar_Pulldown' },
+  rms: { n: 'Remo sentado en máquina, agarre neutro', sets: 3, min: 8, max: 12, rest: 120, inc: 5, img: 'Leverage_Iso_Row' },
+  rmp: { n: 'Remo en polea', sets: 3, min: 8, max: 12, rest: 120, inc: 5, img: 'Seated_Cable_Rows' },
+  cpm: { n: 'Curl predicador en máquina', sets: 3, min: 8, max: 12, rest: 90, inc: 5, img: 'Machine_Preacher_Curls' },
+  cbp: { n: 'Curl con barra en polea', sets: 3, min: 8, max: 12, rest: 90, inc: 5, img: 'Standing_Biceps_Cable_Curl' },
+  cmd: { n: 'Curl con mancuernas de pie', sets: 3, min: 8, max: 12, rest: 90, inc: 2, opt: true, img: 'Dumbbell_Bicep_Curl' },
+  pbp: { n: 'Press banca', sets: 3, min: 6, max: 10, rest: 150, inc: 2.5, img: 'Barbell_Bench_Press_-_Medium_Grip' },
+  ppm: { n: 'Press de pecho en máquina', sets: 3, min: 8, max: 12, rest: 120, inc: 5, img: 'Leverage_Chest_Press' },
+  fon: { n: 'Fondos asistidos', sets: 3, min: 6, max: 10, rest: 120, inc: 5, asis: true, img: 'Dips_-_Triceps_Version' },
+  tpo: { n: 'Extensión de tríceps en polea', sets: 3, min: 10, max: 15, rest: 90, inc: 5, img: 'Triceps_Pushdown' },
+  pbi: { n: 'Press banca inclinado', sets: 3, min: 6, max: 10, rest: 150, inc: 2.5, img: 'Barbell_Incline_Bench_Press_-_Medium_Grip' },
+  tnc: { n: 'Tríceps sobre la cabeza en polea', sets: 3, min: 10, max: 15, rest: 90, inc: 5, opt: true, img: 'Cable_Rope_Overhead_Triceps_Extension' },
+  prn: { n: 'Prensa de piernas', sets: 3, min: 8, max: 12, rest: 150, inc: 10, img: 'Leg_Press' },
+  exq: { n: 'Extensión de cuádriceps', sets: 3, min: 10, max: 15, rest: 90, inc: 5, img: 'Leg_Extensions' },
+  abd: { n: 'Abductores (abrir)', sets: 3, min: 12, max: 15, rest: 90, inc: 5, img: 'Thigh_Abductor' },
+  adu: { n: 'Aductores (cerrar)', sets: 3, min: 12, max: 15, rest: 90, inc: 5, img: 'Thigh_Adductor' },
+  hip: { n: 'Hip thrust en máquina', sets: 3, min: 8, max: 12, rest: 120, inc: 10, img: 'Barbell_Hip_Thrust' },
+  hom: { n: 'Press de hombros en máquina', sets: 3, min: 8, max: 12, rest: 90, inc: 5, opt: true, img: 'Machine_Shoulder_Military_Press' },
+  abs: { n: 'Abdominales en máquina', sets: 3, min: 12, max: 20, rest: 60, inc: 5, opt: true, img: 'Ab_Crunch_Machine' }
 };
 var DAYS_DEF = [
   { id: 'eb', n: 'Espalda y bíceps', c: '#5AB4F0', ex: ['dom', 'jal', 'rms', 'rmp', 'cpm', 'cbp', 'cmd'] },
   { id: 'pt', n: 'Pecho y tríceps', c: '#F2729F', ex: ['pbp', 'ppm', 'fon', 'tpo', 'pbi', 'tnc'] },
   { id: 'pi', n: 'Pierna', c: '#F5B83D', ex: ['prn', 'exq', 'abd', 'adu', 'hip', 'hom', 'abs'] }
 ];
+var CAT = [{"g": "Pecho", "x": [["Press banca con barra", "Barbell_Bench_Press_-_Medium_Grip", "c"], ["Press banca inclinado con barra", "Barbell_Incline_Bench_Press_-_Medium_Grip", "c"], ["Press banca declinado", "Decline_Barbell_Bench_Press", "c"], ["Press con mancuernas", "Dumbbell_Bench_Press", "c"], ["Press inclinado con mancuernas", "Incline_Dumbbell_Press", "c"], ["Press de pecho en máquina", "Leverage_Chest_Press", "m"], ["Press inclinado en máquina", "Leverage_Incline_Chest_Press", "m"], ["Aperturas con mancuernas", "Dumbbell_Flyes", "d"], ["Aperturas inclinadas con mancuernas", "Incline_Dumbbell_Flyes", "d"], ["Contractor de pecho (pec deck)", "Butterfly", "i"], ["Cruce de poleas", "Cable_Crossover", "i"], ["Cruce de poleas desde abajo", "Low_Cable_Crossover", "i"], ["Fondos para pecho", "Dips_-_Chest_Version", "b"], ["Flexiones", "Pushups", "b"], ["Pullover con mancuerna", "Bent-Arm_Dumbbell_Pullover", "d"]]}, {"g": "Espalda", "x": [["Dominadas", "Pullups", "b"], ["Dominadas supinas", "Chin-Up", "b"], ["Jalón al pecho agarre abierto", "Wide-Grip_Lat_Pulldown", "m"], ["Jalón con triángulo (agarre estrecho)", "V-Bar_Pulldown", "m"], ["Jalón supino", "Underhand_Cable_Pulldowns", "m"], ["Jalón a una mano", "One_Arm_Lat_Pulldown", "m"], ["Pullover en polea (brazos rectos)", "Straight-Arm_Pulldown", "i"], ["Remo en polea baja", "Seated_Cable_Rows", "m"], ["Remo a una mano en polea", "Seated_One-arm_Cable_Pulley_Rows", "m"], ["Remo con barra", "Bent_Over_Barbell_Row", "c"], ["Remo con mancuerna a una mano", "One-Arm_Dumbbell_Row", "c"], ["Remo en máquina", "Leverage_Iso_Row", "m"], ["Remo alto en máquina", "Leverage_High_Row", "m"], ["Remo en T", "T-Bar_Row_with_Handle", "c"], ["Remo en banco inclinado", "Dumbbell_Incline_Row", "c"], ["Peso muerto", "Barbell_Deadlift", "c"], ["Hiperextensiones (lumbar)", "Hyperextensions_Back_Extensions", "b"], ["Encogimientos con mancuernas", "Dumbbell_Shrug", "d"], ["Encogimientos con barra", "Barbell_Shrug", "i"]]}, {"g": "Hombro", "x": [["Press militar con barra", "Standing_Military_Press", "c"], ["Press de hombros con mancuernas", "Dumbbell_Shoulder_Press", "c"], ["Press Arnold", "Arnold_Dumbbell_Press", "c"], ["Press de hombros en máquina", "Machine_Shoulder_Military_Press", "m"], ["Elevaciones laterales", "Side_Lateral_Raise", "d"], ["Elevaciones laterales en polea", "Cable_Seated_Lateral_Raise", "i"], ["Elevaciones frontales", "Front_Dumbbell_Raise", "d"], ["Pájaros (deltoide posterior)", "Seated_Bent-Over_Rear_Delt_Raise", "d"], ["Contractor invertido", "Reverse_Machine_Flyes", "i"], ["Face pull", "Face_Pull", "i"], ["Remo al mentón", "Upright_Barbell_Row", "i"]]}, {"g": "Bíceps", "x": [["Curl con barra", "Barbell_Curl", "i"], ["Curl con barra Z", "EZ-Bar_Curl", "i"], ["Curl con mancuernas", "Dumbbell_Bicep_Curl", "d"], ["Curl alterno", "Dumbbell_Alternate_Bicep_Curl", "d"], ["Curl martillo", "Hammer_Curls", "d"], ["Curl inclinado", "Incline_Dumbbell_Curl", "d"], ["Curl concentrado", "Concentration_Curls", "d"], ["Curl predicador con barra", "Preacher_Curl", "i"], ["Curl predicador en máquina", "Machine_Preacher_Curls", "i"], ["Curl en polea", "Standing_Biceps_Cable_Curl", "i"], ["Curl martillo con cuerda", "Cable_Hammer_Curls_-_Rope_Attachment", "i"], ["Curl araña", "Spider_Curl", "i"]]}, {"g": "Tríceps", "x": [["Extensión en polea con barra", "Triceps_Pushdown", "i"], ["Extensión en polea con cuerda", "Triceps_Pushdown_-_Rope_Attachment", "i"], ["Extensión en polea agarre invertido", "Reverse_Grip_Triceps_Pushdown", "i"], ["Extensión sobre la cabeza con cuerda", "Cable_Rope_Overhead_Triceps_Extension", "i"], ["Press francés con barra Z", "EZ-Bar_Skullcrusher", "i"], ["Extensión con mancuerna sobre la cabeza", "Dumbbell_One-Arm_Triceps_Extension", "d"], ["Patada de tríceps", "Tricep_Dumbbell_Kickback", "d"], ["Fondos para tríceps", "Dips_-_Triceps_Version", "b"], ["Fondos en banco", "Bench_Dips", "b"], ["Fondos en máquina", "Dip_Machine", "m"], ["Press banca agarre estrecho", "Close-Grip_Barbell_Bench_Press", "c"], ["Extensión de tríceps en máquina", "Machine_Triceps_Extension", "i"]]}, {"g": "Cuádriceps", "x": [["Sentadilla con barra", "Barbell_Squat", "c"], ["Sentadilla frontal", "Front_Barbell_Squat", "c"], ["Sentadilla goblet", "Goblet_Squat", "c"], ["Sentadilla en multipower", "Smith_Machine_Squat", "m"], ["Sentadilla hack", "Hack_Squat", "m"], ["Prensa de piernas", "Leg_Press", "m"], ["Extensión de cuádriceps", "Leg_Extensions", "i"], ["Zancadas con mancuernas", "Dumbbell_Lunges", "c"], ["Zancadas caminando", "Barbell_Walking_Lunge", "c"], ["Sentadilla búlgara", "Split_Squat_with_Dumbbells", "c"], ["Subidas al cajón", "Dumbbell_Step_Ups", "c"]]}, {"g": "Femoral y glúteo", "x": [["Curl femoral tumbado", "Lying_Leg_Curls", "i"], ["Curl femoral sentado", "Seated_Leg_Curl", "i"], ["Peso muerto rumano", "Romanian_Deadlift", "c"], ["Peso muerto piernas rígidas con mancuernas", "Stiff-Legged_Dumbbell_Deadlift", "c"], ["Hip thrust", "Barbell_Hip_Thrust", "m"], ["Puente de glúteo", "Barbell_Glute_Bridge", "m"], ["Patada de glúteo en polea", "One-Legged_Cable_Kickback", "i"], ["Abductores (abrir)", "Thigh_Abductor", "i"], ["Aductores (cerrar)", "Thigh_Adductor", "i"], ["Buenos días", "Good_Morning", "c"]]}, {"g": "Gemelo", "x": [["Gemelo de pie en máquina", "Standing_Calf_Raises", "i"], ["Gemelo sentado", "Seated_Calf_Raise", "i"], ["Gemelo en prensa", "Calf_Press_On_The_Leg_Press_Machine", "i"]]}, {"g": "Abdomen", "x": [["Crunch en máquina", "Ab_Crunch_Machine", "a"], ["Crunch en polea de rodillas", "Cable_Crunch", "a"], ["Crunch", "Crunches", "a"], ["Crunch inverso", "Reverse_Crunch", "a"], ["Plancha (reps = segundos)", "Plank", "s"], ["Elevación de piernas colgado", "Hanging_Leg_Raise", "a"], ["Elevación de rodillas en paralelas", "Knee_Hip_Raise_On_Parallel_Bars", "a"], ["Rueda abdominal", "Ab_Roller", "a"], ["Russian twist", "Russian_Twist", "a"], ["Pallof press", "Pallof_Press", "a"]]}];
+var TYPE = { c: [3, 6, 10, 150, 2.5], m: [3, 8, 12, 120, 5], i: [3, 10, 15, 90, 2.5], d: [3, 10, 15, 90, 2], b: [3, 6, 12, 120, 2.5], a: [3, 12, 20, 60, 5], s: [3, 30, 60, 60, 5] };
+var SP = {"Barbell_Bench_Press_-_Medium_Grip":[0,0,15],"Barbell_Incline_Bench_Press_-_Medium_Grip":[0,1,15],"Decline_Barbell_Bench_Press":[0,2,15],"Dumbbell_Bench_Press":[0,3,15],"Incline_Dumbbell_Press":[0,4,15],"Leverage_Chest_Press":[0,5,15],"Leverage_Incline_Chest_Press":[0,6,15],"Dumbbell_Flyes":[0,7,15],"Incline_Dumbbell_Flyes":[0,8,15],"Butterfly":[0,9,15],"Cable_Crossover":[0,10,15],"Low_Cable_Crossover":[0,11,15],"Dips_-_Chest_Version":[0,12,15],"Pushups":[0,13,15],"Bent-Arm_Dumbbell_Pullover":[0,14,15],"Pullups":[1,0,19],"Chin-Up":[1,1,19],"Wide-Grip_Lat_Pulldown":[1,2,19],"V-Bar_Pulldown":[1,3,19],"Underhand_Cable_Pulldowns":[1,4,19],"One_Arm_Lat_Pulldown":[1,5,19],"Straight-Arm_Pulldown":[1,6,19],"Seated_Cable_Rows":[1,7,19],"Seated_One-arm_Cable_Pulley_Rows":[1,8,19],"Bent_Over_Barbell_Row":[1,9,19],"One-Arm_Dumbbell_Row":[1,10,19],"Leverage_Iso_Row":[1,11,19],"Leverage_High_Row":[1,12,19],"T-Bar_Row_with_Handle":[1,13,19],"Dumbbell_Incline_Row":[1,14,19],"Barbell_Deadlift":[1,15,19],"Hyperextensions_Back_Extensions":[1,16,19],"Dumbbell_Shrug":[1,17,19],"Barbell_Shrug":[1,18,19],"Standing_Military_Press":[2,0,11],"Dumbbell_Shoulder_Press":[2,1,11],"Arnold_Dumbbell_Press":[2,2,11],"Machine_Shoulder_Military_Press":[2,3,11],"Side_Lateral_Raise":[2,4,11],"Cable_Seated_Lateral_Raise":[2,5,11],"Front_Dumbbell_Raise":[2,6,11],"Seated_Bent-Over_Rear_Delt_Raise":[2,7,11],"Reverse_Machine_Flyes":[2,8,11],"Face_Pull":[2,9,11],"Upright_Barbell_Row":[2,10,11],"Barbell_Curl":[3,0,12],"EZ-Bar_Curl":[3,1,12],"Dumbbell_Bicep_Curl":[3,2,12],"Dumbbell_Alternate_Bicep_Curl":[3,3,12],"Hammer_Curls":[3,4,12],"Incline_Dumbbell_Curl":[3,5,12],"Concentration_Curls":[3,6,12],"Preacher_Curl":[3,7,12],"Machine_Preacher_Curls":[3,8,12],"Standing_Biceps_Cable_Curl":[3,9,12],"Cable_Hammer_Curls_-_Rope_Attachment":[3,10,12],"Spider_Curl":[3,11,12],"Triceps_Pushdown":[4,0,12],"Triceps_Pushdown_-_Rope_Attachment":[4,1,12],"Reverse_Grip_Triceps_Pushdown":[4,2,12],"Cable_Rope_Overhead_Triceps_Extension":[4,3,12],"EZ-Bar_Skullcrusher":[4,4,12],"Dumbbell_One-Arm_Triceps_Extension":[4,5,12],"Tricep_Dumbbell_Kickback":[4,6,12],"Dips_-_Triceps_Version":[4,7,12],"Bench_Dips":[4,8,12],"Dip_Machine":[4,9,12],"Close-Grip_Barbell_Bench_Press":[4,10,12],"Machine_Triceps_Extension":[4,11,12],"Barbell_Squat":[5,0,11],"Front_Barbell_Squat":[5,1,11],"Goblet_Squat":[5,2,11],"Smith_Machine_Squat":[5,3,11],"Hack_Squat":[5,4,11],"Leg_Press":[5,5,11],"Leg_Extensions":[5,6,11],"Dumbbell_Lunges":[5,7,11],"Barbell_Walking_Lunge":[5,8,11],"Split_Squat_with_Dumbbells":[5,9,11],"Dumbbell_Step_Ups":[5,10,11],"Lying_Leg_Curls":[6,0,10],"Seated_Leg_Curl":[6,1,10],"Romanian_Deadlift":[6,2,10],"Stiff-Legged_Dumbbell_Deadlift":[6,3,10],"Barbell_Hip_Thrust":[6,4,10],"Barbell_Glute_Bridge":[6,5,10],"One-Legged_Cable_Kickback":[6,6,10],"Thigh_Abductor":[6,7,10],"Thigh_Adductor":[6,8,10],"Good_Morning":[6,9,10],"Standing_Calf_Raises":[7,0,3],"Seated_Calf_Raise":[7,1,3],"Calf_Press_On_The_Leg_Press_Machine":[7,2,3],"Ab_Crunch_Machine":[8,0,10],"Cable_Crunch":[8,1,10],"Crunches":[8,2,10],"Reverse_Crunch":[8,3,10],"Plank":[8,4,10],"Hanging_Leg_Raise":[8,5,10],"Knee_Hip_Raise_On_Parallel_Bars":[8,6,10],"Ab_Roller":[8,7,10],"Russian_Twist":[8,8,10],"Pallof_Press":[8,9,10]};
+function bg(id, f) { var m = SP[id]; if (!m) return ''; return 'background-image:url(sp/s' + m[0] + '.jpg);background-size:200% ' + (m[2] * 100) + '%;background-position:' + (f ? 100 : 0) + '% ' + (m[2] > 1 ? (m[1] / (m[2] - 1) * 100).toFixed(4) : 0) + '%'; }
+function thumb(id) { return '<span class="th" style="' + bg(id, 0) + '"></span>'; }
+function photo(id) { return '<div class="ph" role="img" aria-label="Cómo se hace"><span class="f" style="' + bg(id, 0) + '"></span><span class="f b" style="' + bg(id, 1) + '"></span><span class="cr">Free Exercise DB</span></div>'; }
+function norm(t) { return String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
 function clone(o) { return JSON.parse(JSON.stringify(o)); }
-function fresh() { return { v: 1, goal: 3, sound: true, ex: clone(EX_DEF), days: clone(DAYS_DEF), sessions: [], active: null }; }
+function fresh() { return { v: 1, goal: 3, sound: true, itimer: false, ex: clone(EX_DEF), days: clone(DAYS_DEF), sessions: [], active: null }; }
 function load() {
   try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1 && s.ex && s.days) return s; } catch (e) {}
   return fresh();
 }
 var S = load();
+(function migrate() { var ch = false; Object.keys(EX_DEF).forEach(function (k) { if (S.ex[k] && !S.ex[k].img && EX_DEF[k].img) { S.ex[k].img = EX_DEF[k].img; ch = true; } }); if (S.itimer === undefined) { S.itimer = false; ch = true; } if (ch) try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} })();
 function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { toast('No se ha podido guardar'); } }
 try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
 
@@ -427,9 +475,10 @@ function workout() {
 function card(it, i) {
   var e = S.ex[it.ex] || { n: '?', sets: 3, min: 8, max: 12, rest: 90 }, sg = suggest(it.ex), dn = doneSets(it).length;
   var all = dn > 0 && dn === it.sets.length;
-  var h = '<section class="ex' + (it.open ? ' open' : '') + (all ? ' alldone' : '') + '" id="ex-' + i + '">';
+  var h = '<section class="ex' + (it.open ? ' open' : '') + (all ? ' alldone' : '') + (PHON[it.ex] ? ' phon' : '') + '" id="ex-' + i + '">';
   h += '<button type="button" class="exh" data-act="toggle" data-i="' + i + '" aria-expanded="' + !!it.open + '"><div><div class="nm">' + esc(e.n) + (e.opt ? '<span class="opt">Opcional</span>' : '') + '</div><div class="mt">' + e.sets + ' × ' + e.min + '-' + e.max + ' · descanso ' + mmss(e.rest) + '</div></div><span class="cnt num">' + dn + '/' + it.sets.length + '</span>' + I.chev + '</button>';
   h += '<div class="exb"><div><div class="exin">';
+  if (e.img) h += '<button type="button" class="howto" data-act="photo" data-i="' + i + '">' + thumb(e.img) + 'Cómo se hace' + I.chev + '</button><div class="exph"><div>' + (PHON[it.ex] ? photo(e.img) : '') + '</div></div>';
   if (sg) h += '<div class="last"><span>Última (' + esc(dfmt(sg.last.t, { day: 'numeric', month: 'short' })) + '): <b class="num">' + esc(setsTxt(sg.last.sets)) + '</b></span><span class="sgc' + (sg.up ? ' up' : '') + '">' + (sg.up ? '↑ ' : '') + esc(sg.txt) + '</span></div>';
   else h += '<div class="last">Primera vez: apunta el peso y las repes, y la próxima vez te lo recuerdo.</div>';
   h += '<div class="cols"><span></span><span>' + (e.asis ? 'Asist. kg' : 'kg') + '</span><span>Reps</span><span></span></div>';
@@ -443,6 +492,7 @@ function card(it, i) {
   h += '</div></div></div></section>';
   return h;
 }
+var PHON = {};
 function refreshCard(i) {
   var el = $('#ex-' + i); if (!el) return;
   var tmp = document.createElement('div'); tmp.innerHTML = card(S.active.items[i], i);
@@ -470,7 +520,8 @@ function beep() {
     });
   } catch (e) {}
 }
-function startRest(sec) { S.active.restEnd = Date.now() + sec * 1000; S.active.restTot = sec; save(); tickRest(); }
+function iTimer(sec) { try { location.href = 'shortcuts://run-shortcut?name=' + encodeURIComponent('Descanso Gym') + '&input=text&text=' + Math.round(sec); } catch (e) {} }
+function startRest(sec) { S.active.restEnd = Date.now() + sec * 1000; S.active.restTot = sec; save(); tickRest(); if (S.itimer) setTimeout(function () { iTimer(sec); }, 350); }
 function tickRest() {
   var R = $('#rest'), a = S.active;
   if (!a || !a.restEnd) { R.classList.remove('on', 'end'); stopIv(); return; }
@@ -640,13 +691,15 @@ function routine(dayId) {
   h += '<div class="seg" role="tablist">' + S.days.map(function (x) { return '<button type="button" class="' + (x.id === d.id ? 'on' : '') + '" data-act="rday" data-d="' + x.id + '" role="tab" aria-selected="' + (x.id === d.id) + '">' + esc(x.n.split(' ')[0]) + '</button>'; }).join('') + '</div>';
   d.ex.forEach(function (x, k) {
     var e = S.ex[x]; if (!e) return;
-    h += '<div class="rx"><div class="grow"><div class="nm">' + esc(e.n) + (e.opt ? '<span class="opt">Opcional</span>' : '') + '</div><div class="mt">' + e.sets + ' × ' + e.min + '-' + e.max + ' · ' + mmss(e.rest) + ' · +' + fk(e.inc) + ' kg' + (e.asis ? ' · asistida' : '') + '</div></div>';
+    h += '<div class="rx">' + (e.img ? thumb(e.img) : '') + '<div class="grow"><div class="nm">' + esc(e.n) + (e.opt ? '<span class="opt">Opcional</span>' : '') + '</div><div class="mt">' + e.sets + ' × ' + e.min + '-' + e.max + ' · ' + mmss(e.rest) + ' · +' + fk(e.inc) + ' kg' + (e.asis ? ' · asistida' : '') + '</div></div>';
     h += '<button type="button" class="iconbtn" data-act="rup" data-k="' + k + '" aria-label="Subir"' + (k ? '' : ' disabled style="opacity:.25"') + '>' + I.up + '</button><button type="button" class="iconbtn" data-act="rdown" data-k="' + k + '" aria-label="Bajar"' + (k < d.ex.length - 1 ? '' : ' disabled style="opacity:.25"') + '>' + I.down + '</button><button type="button" class="iconbtn" data-act="redit" data-x="' + x + '" aria-label="Editar">' + I.edit + '</button></div>';
   });
   h += '<button type="button" class="add" data-act="radd" style="margin-top:10px">' + I.plus + 'Añadir ejercicio a ' + esc(d.n.toLowerCase()) + '</button>';
   h += '<h2>Ajustes</h2>';
   h += '<div class="set-row"><div><div style="font-weight:600">Objetivo semanal</div><div class="small muted">Días de gimnasio por semana</div></div><div class="mini"><button type="button" data-act="goal" data-s="-1" aria-label="Menos">−</button><span class="num">' + S.goal + '</span><button type="button" data-act="goal" data-s="1" aria-label="Más">+</button></div></div>';
   h += '<div class="set-row"><div><div style="font-weight:600">Sonido al acabar el descanso</div><div class="small muted">Con el móvil en silencio no suena</div></div><button type="button" class="switch' + (S.sound ? ' on' : '') + '" data-act="sound" role="switch" aria-checked="' + S.sound + '" aria-label="Sonido"></button></div>';
+  h += '<div class="set-row" style="flex-wrap:wrap"><div style="flex:1;min-width:0"><div style="font-weight:600">Temporizador del iPhone</div><div class="small muted">Arranca el temporizador del reloj con el tiempo de descanso: sale en la pantalla bloqueada y en la isla, y suena aunque tengas el móvil en silencio</div></div><button type="button" class="switch' + (S.itimer ? ' on' : '') + '" data-act="itimer" role="switch" aria-checked="' + !!S.itimer + '" aria-label="Temporizador del iPhone"></button>' +
+    '<div style="flex-basis:100%"><ol class="steps"><li>Abre la app <b>Atajos</b> y toca <b>+</b>.</li><li>Ponle de nombre exactamente <b>Descanso Gym</b>.</li><li>Añade la acción <b>Iniciar temporizador</b>.</li><li>Toca la duración, elige <b>Entrada del atajo</b> y pon la unidad en <b>segundos</b>.</li><li>Guárdalo, activa el interruptor de arriba y toca <b>Probar</b>.</li></ol><button type="button" class="btn" data-act="itest" style="margin-top:10px">Probar con 10 s</button></div></div>';
   h += '<div class="set-row"><div><div style="font-weight:600">Copia de seguridad</div><div class="small muted">Tus datos viven en este móvil</div></div><div style="display:flex;gap:6px"><button type="button" class="btn" data-act="export">Guardar</button><button type="button" class="btn" data-act="import">Cargar</button></div></div>';
   return h;
 }
@@ -671,13 +724,42 @@ function sheet(html) { var sh = $('#sheet'); $('#sheet-c').innerHTML = html; sh.
 function closeSheet() { var sh = $('#sheet'); sh.classList.remove('on'); setTimeout(function () { sh.hidden = true; }, 420); }
 var askCb = null;
 function ask(t, p, ok, danger, cb) { askCb = cb; sheet('<h3>' + esc(t) + '</h3><p>' + esc(p) + '</p><div class="acts"><button type="button" class="btn" data-act="sheet-close">Cancelar</button><button type="button" class="btn ' + (danger ? 'danger' : 'pri') + '" data-act="ask-ok">' + esc(ok) + '</button></div>'); }
-function pickEx(title, onlyFree, cb) {
-  PK = cb;
-  var used = {}; if (onlyFree) onlyFree.forEach(function (x) { used[x] = 1; });
-  var h = '<h3>' + esc(title) + '</h3>';
-  Object.keys(S.ex).forEach(function (x) { if (!used[x]) h += '<button type="button" class="pick" data-act="pk" data-x="' + x + '"><span>' + esc(S.ex[x].n) + '</span>' + I.plus + '</button>'; });
-  h += '<button type="button" class="pick" data-act="pk-new" style="color:var(--acc);font-weight:700"><span>Nuevo ejercicio</span>' + I.plus + '</button>';
-  sheet(h);
+var PKX = {}, PKO = {};
+function pickEx(title, exclude, cb) {
+  PK = cb; PKX = {}; (exclude || []).forEach(function (x) { PKX[x] = 1; });
+  sheet('<h3>' + esc(title) + '</h3><input type="search" class="srch" id="pk-q" placeholder="Buscar: press, curl, remo..." autocomplete="off"><div id="pk-list">' + pkList('') + '</div><button type="button" class="pick" data-act="pk-new" style="color:var(--acc);font-weight:700;border:0;margin-top:6px"><span>Crear ejercicio nuevo</span>' + I.plus + '</button>');
+}
+function catKey(id) { return 'c_' + id.replace(/[^A-Za-z0-9]/g, '_'); }
+function pkItem(key, name, img, tag) {
+  var used = PKX[key];
+  return '<div class="pki" id="pki-' + key + '"><button type="button" class="pkh" data-act="pk-open" data-k="' + key + '">' + (img ? thumb(img) : '<span class="th"></span>') + '<span class="nm">' + esc(name) + (tag ? '<br><span class="tag">' + esc(tag) + '</span>' : '') + '</span>' + I.chev + '</button>' +
+    '<div class="pkb"><div><div class="pkin">' + (img ? '<div class="phs" data-img="' + img + '"></div>' : '') + '<button type="button" class="pkadd" data-act="pk-add" data-k="' + key + '"' + (used ? ' disabled' : '') + '>' + (used ? 'Ya está' : I.plus + 'Añadir') + '</button></div></div></div></div>';
+}
+function pkList(q) {
+  var h = '', qq = norm(q.trim()), mine = Object.keys(S.ex).filter(function (x) { return x.indexOf('c_') !== 0; });
+  if (qq) {
+    var n = 0;
+    mine.forEach(function (x) { if (norm(S.ex[x].n).indexOf(qq) >= 0) { h += pkItem(x, S.ex[x].n, S.ex[x].img, 'Tus ejercicios'); n++; } });
+    var have = {}; mine.forEach(function (x) { if (S.ex[x].img) have[S.ex[x].img] = 1; });
+    CAT.forEach(function (g) { g.x.forEach(function (e) { if (have[e[1]] && !S.ex[catKey(e[1])]) return; if (S.ex[catKey(e[1])] && have[e[1]]) return; if (norm(e[0]).indexOf(qq) >= 0 || norm(g.g).indexOf(qq) >= 0) { h += pkItem(catKey(e[1]), e[0], e[1], g.g); n++; } }); });
+    return n ? h : '<p class="small muted" style="margin:10px 2px">No hay ninguno con ese nombre. Puedes crearlo abajo.</p>';
+  }
+  var gs = [{ g: 'Tus ejercicios', items: mine.map(function (x) { return [x, S.ex[x].n, S.ex[x].img]; }) }].concat(CAT.map(function (g) { return { g: g.g, items: g.x.map(function (e) { return [catKey(e[1]), e[0], e[1]]; }) }; }));
+  gs.forEach(function (g, k) {
+    h += '<div class="grp' + (PKO[g.g] ? ' open' : '') + '"><button type="button" class="grph" data-act="pk-grp" data-g="' + esc(g.g) + '"><span>' + esc(g.g) + '<small>' + g.items.length + '</small></span>' + I.chev + '</button><div class="grpb"><div>';
+    g.items.forEach(function (it) { h += pkItem(it[0], it[1], it[2]); });
+    h += '</div></div></div>';
+  });
+  return h;
+}
+function catAdd(key) {
+  if (S.ex[key]) return key;
+  var id = null, nm = null, tp = 'i';
+  CAT.forEach(function (g) { g.x.forEach(function (e) { if (catKey(e[1]) === key) { nm = e[0]; id = e[1]; tp = e[2]; } }); });
+  if (!id) return null;
+  var d = TYPE[tp] || TYPE.i;
+  S.ex[key] = { n: nm, sets: d[0], min: d[1], max: d[2], rest: d[3], inc: d[4], img: id };
+  return key;
 }
 var PK = null;
 
@@ -691,6 +773,7 @@ document.addEventListener('click', function (ev) {
     if (S.active) { if (S.active.day === id) { location.hash = '#/w'; return; } ask('Tienes un entreno a medias', 'Si empiezas otro, se descarta el que llevas.', 'Empezar otro', true, function () { S.active = null; startDay(id); }); return; }
     startDay(id); return;
   }
+  if (a === 'photo') { var ix = S.active.items[i], sec = $('#ex-' + i); PHON[ix.ex] = !PHON[ix.ex]; if (PHON[ix.ex]) { var pw = sec.querySelector('.exph>div'); if (!pw.innerHTML) pw.innerHTML = photo(S.ex[ix.ex].img); } sec.classList.toggle('phon', !!PHON[ix.ex]); return; }
   if (a === 'toggle') { var it = S.active.items[i]; it.open = !it.open; save(); var el = $('#ex-' + i); el.classList.toggle('open', it.open); b.setAttribute('aria-expanded', it.open); return; }
   if (a === 'inc' || a === 'dec') {
     var st = S.active.items[i], e = S.ex[st.ex], s = st.sets[j], f = b.dataset.f, step = f === 'kg' ? (e.inc || 2.5) : 1;
@@ -741,7 +824,15 @@ document.addEventListener('click', function (ev) {
   if (a === 'rup' || a === 'rdown') { var d = dayById(RT.day), k2 = +b.dataset.k, k3 = a === 'rup' ? k2 - 1 : k2 + 1; if (k3 < 0 || k3 >= d.ex.length) return; var t = d.ex[k2]; d.ex[k2] = d.ex[k3]; d.ex[k3] = t; save(); render(false); return; }
   if (a === 'redit') { sheet(exForm(b.dataset.x, RT.day)); return; }
   if (a === 'radd') { var dd = dayById(RT.day); pickEx('Añadir a ' + dd.n.toLowerCase(), dd.ex, function (x) { dd.ex.push(x); save(); closeSheet(); render(false); }); return; }
-  if (a === 'pk') { if (PK) PK(b.dataset.x); return; }
+  if (a === 'pk-grp') { var gg = b.dataset.g; PKO[gg] = !PKO[gg]; b.parentNode.classList.toggle('open', !!PKO[gg]); return; }
+  if (a === 'pk-open') {
+    var box = document.getElementById('pki-' + b.dataset.k); if (!box) return;
+    var was = box.classList.contains('open');
+    document.querySelectorAll('.pki.open').forEach(function (o) { o.classList.remove('open'); });
+    if (!was) { var ps = box.querySelector('.phs'); if (ps && !ps.innerHTML) ps.innerHTML = photo(ps.dataset.img); box.classList.add('open'); setTimeout(function () { box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 300); }
+    return;
+  }
+  if (a === 'pk-add') { var kk = b.dataset.k; if (kk.indexOf('c_') === 0) kk = catAdd(kk); if (kk && PK) { save(); PK(kk); toast('Añadido'); } return; }
   if (a === 'pk-new') { var cbk = PK; sheet(exForm(null, route().charAt(0) === 'w' ? null : RT.day)); FM._cb = cbk; return; }
   if (a === 'fm') {
     var f2 = b.dataset.f, sp = +b.dataset.s, lim = { sets: [1, 10], min: [1, 50], max: [1, 60], rest: [15, 600], inc: [0.5, 50] }[f2];
@@ -762,6 +853,8 @@ document.addEventListener('click', function (ev) {
   if (a === 'fm-del') { var d4 = dayById(FM._day), xx = FM._x; ask('¿Quitar de ' + d4.n.toLowerCase() + '?', 'El historial de este ejercicio se conserva.', 'Quitar', true, function () { d4.ex = d4.ex.filter(function (y) { return y !== xx; }); save(); render(false); }); return; }
   if (a === 'goal') { S.goal = Math.max(1, Math.min(7, S.goal + +b.dataset.s)); save(); render(false); return; }
   if (a === 'sound') { S.sound = !S.sound; save(); b.classList.toggle('on', S.sound); b.setAttribute('aria-checked', S.sound); if (S.sound) { unlockAudio(); beep(); } return; }
+  if (a === 'itimer') { S.itimer = !S.itimer; save(); b.classList.toggle('on', S.itimer); b.setAttribute('aria-checked', S.itimer); return; }
+  if (a === 'itest') { iTimer(10); return; }
   if (a === 'export') { exportData(); return; }
   if (a === 'import') { $('#imp').click(); return; }
 });
@@ -770,6 +863,7 @@ document.addEventListener('change', function (ev) {
   var s = S.active && S.active.items[+t.dataset.i] && S.active.items[+t.dataset.i].sets[+t.dataset.j]; if (!s) return;
   var v = num(t.value); s[t.dataset.f] = v === null ? '' : fk(Math.max(0, t.dataset.f === 'reps' ? Math.round(v) : v)); t.value = s[t.dataset.f]; save();
 });
+document.addEventListener('input', function (ev) { if (ev.target.id === 'pk-q') { var l = $('#pk-list'); if (l) l.innerHTML = pkList(ev.target.value); } });
 document.addEventListener('focusin', function (ev) { if (ev.target.matches && ev.target.matches('.stp input')) setTimeout(function () { try { ev.target.select(); } catch (e) {} }, 30); });
 document.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' && ev.target.matches && ev.target.matches('.stp input')) ev.target.blur(); });
 
