@@ -1,5 +1,5 @@
 // Gym · service worker
-var VERSION = '202609231351-633675b8';
+var VERSION = '202609231413-486d87aa';
 var CORE = 'gym-core-' + VERSION;
 var FILES = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 self.addEventListener('install', function (e) { e.waitUntil(caches.open(CORE).then(function (c) { return c.addAll(FILES); }).then(function () { return self.skipWaiting(); })); });
